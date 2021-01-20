@@ -17,10 +17,8 @@ function buildMetadata(sample) {
   function buildCharts(sample) {
     d3.json("samples.json").then((data) => {
       var samples = data.samples;
-      var resultArray = samples.filter(sampleObj => sampleObj.id == sample);
-      var result = resultArray[0];
-      var sample_values = result.sample_values;
-      var bubbleLayout = {
+     var sample_values = result.sample_values;
+   var bubbleayout = {
         title: "Bacteria Cultures Per Sample",
         margin: { t: 0 },
         hovermode: "closest",
@@ -31,12 +29,11 @@ function buildMetadata(sample) {
         {
           x: otu_ids,
           y: sample_values,
-          text: otu_labels,
           mode: "markers",
           marker: {
-            size: sample_values,
+       size: sample_values,
             color: otu_ids,
-            colorscale: "Earth" } }];
+            colorsale: "Earth" } }];
   
       Plotly.newPlot("bubble", bubbleData, bubbleLayout);
   
@@ -45,15 +42,13 @@ function buildMetadata(sample) {
         {
           y: yticks,
           x: sample_values.slice(0, 10).reverse(),
-          text: otu_labels.slice(0, 10).reverse(),
-          type: "bar",
           orientation: "h",
         }
       ];
   
       var barLayout = {
         title: "Top 10 Bacteria Cultures Found",
-        margin: { t: 30, l: 150 }
+    margin: { t: 30, l: 150 }
       };
   
       Plotly.newPlot("bar", barData, barLayout);
@@ -67,13 +62,13 @@ function buildMetadata(sample) {
   
       sampleNames.forEach((sample) => {
         selector
-          .append("option")
-          .text(sample)
+      .append("option")
+          .tet(sample)
           .property("value", sample)});
  
-      var firstSample = sampleNames[0];
+    var firstSample = sampleNames[0];
       buildCharts(firstSample);
-      buildMetadata(firstSample);
+   buildMetadata(firstSample);
     });
   }
   function optionChanged(newSample) 
